@@ -128,7 +128,7 @@ export function DayCard({ day, onToggleComplete }: DayCardProps) {
                         {ex.name}
                       </span>
                     </div>
-                    {ex.lines.map((line, li) => (
+                    {ex.lines.map((line) => (
                       <div
                         key={line.id}
                         className="flex items-center gap-2"
