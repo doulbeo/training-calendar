@@ -1,9 +1,12 @@
 import { FadeIn } from '@/components/MotionPrimitives';
 import { useTraining } from '@/hooks/useTraining';
 import { CalendarView } from '@/components/training/CalendarView';
+import { Flame } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Index() {
   const { weeks } = useTraining();
+  const navigate = useNavigate();
 
   return (
     <div
@@ -18,21 +21,38 @@ export default function Index() {
           borderBottom: '1px solid var(--border)',
         }}
       >
-        <div style={{ padding: 'var(--spacing-md)' }}>
-          <h1
-            className="font-bold uppercase tracking-wider"
+        <div
+          style={{ padding: 'var(--spacing-md)' }}
+          className="flex items-center justify-between"
+        >
+          <div>
+            <h1
+              className="font-bold uppercase tracking-wider"
+              style={{
+                fontFamily: 'var(--font-family-condensed)',
+                fontSize: 'var(--font-size-headline)',
+                color: 'var(--foreground)',
+                letterSpacing: '0.04em',
+              }}
+            >
+              训练日历
+            </h1>
+            <p style={{ fontSize: 'var(--font-size-label)', color: 'var(--muted-foreground)' }}>
+              蹲推 & 硬拉后侧链 · 7/22 - 8/11
+            </p>
+          </div>
+
+          <button
+            onClick={() => navigate("/warmup")}
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors"
             style={{
-              fontFamily: 'var(--font-family-condensed)',
-              fontSize: 'var(--font-size-headline)',
-              color: 'var(--foreground)',
-              letterSpacing: '0.04em',
+              backgroundColor: 'var(--primary)',
+              color: 'var(--primary-foreground)',
             }}
           >
-            训练日历
-          </h1>
-          <p style={{ fontSize: 'var(--font-size-label)', color: 'var(--muted-foreground)' }}>
-            蹲推 & 硬拉后侧链 · 7/22 - 8/11
-          </p>
+            <Flame className="w-4 h-4" />
+            热身清单
+          </button>
         </div>
       </header>
 

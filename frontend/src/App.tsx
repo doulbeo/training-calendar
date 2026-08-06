@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { AnimatedRoutes } from "@/components/AnimatedRoutes";
 import { PageTransition } from "@/components/PageTransition";
 import Index from "./pages/Index";
+import Warmup from "./pages/Warmup";
 import NotFound from "./pages/NotFound";
 
 /**
@@ -39,6 +40,7 @@ function App() {
         <BrowserRouter>
           <AnimatedRoutes>
             <Route path="/" data-genie-title="Home Page" data-genie-key="Home" element={<PageTransition transition="slide-up"><Index /></PageTransition>} />
+            <Route path="/warmup" data-genie-title="Warmup" data-genie-key="Warmup" element={<PageTransition transition="slide-up"><Warmup /></PageTransition>} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" data-genie-key="NotFound" data-genie-title="Not Found" element={<PageTransition transition="fade"><NotFound /></PageTransition>} />
           </AnimatedRoutes>
