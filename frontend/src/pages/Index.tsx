@@ -15,9 +15,11 @@ export default function Index() {
     >
       {/* Header */}
       <header
-        className="sticky top-0 z-10 backdrop-blur-md"
+        className="sticky top-0 z-50"
         style={{
           backgroundColor: 'oklch(0.16 0.01 260 / 0.92)',
+          backdropFilter: 'blur(12px)',
+          WebkitBackdropFilter: 'blur(12px)',
           borderBottom: '1px solid var(--border)',
         }}
       >
