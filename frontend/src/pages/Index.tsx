@@ -22,7 +22,7 @@ export default function Index() {
         }}
       >
         <div
-          style={{ padding: 'var(--spacing-md)' }}
+          style={{ padding: 'var(--spacing-md)', paddingTop: 'max(var(--spacing-md), env(safe-area-inset-top))' }}
           className="flex items-center justify-between"
         >
           <div>

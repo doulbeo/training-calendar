@@ -10,7 +10,7 @@ export default function Warmup() {
 
   return (
     <PageTransition transition="slide-up">
-      <div className="min-h-screen px-4 py-6 max-w-2xl mx-auto">
+      <div className="min-h-screen px-4 pt-[max(1.5rem,env(safe-area-inset-top))] pb-6 max-w-2xl mx-auto">
         {/* Header */}
         <div className="flex items-center gap-3 mb-6">
           <button
