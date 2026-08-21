@@ -332,7 +332,7 @@ export const defaultTrainingData: TrainingWeek[] = [
   },
   {
     weekNumber: 5,
-    dateRange: '0821-0827',
+    dateRange: '0821-0828',
     days: [
       {
         id: 'w5d1',
@@ -389,10 +389,10 @@ export const defaultTrainingData: TrainingWeek[] = [
       },
       { id: 'w5d6', date: '8月26日', week: 5, dayOfWeek: 3, type: 'rest', label: '休息', completed: false, exercises: [] },
       {
-        id: 'w5d7',
-        date: '8月27日',
+        id: 'w5d8',
+        date: '8月28日',
         week: 5,
-        dayOfWeek: 4,
+        dayOfWeek: 5,
         type: 'deadlift',
         label: '硬拉后侧链训练（第14练）',
         completed: false,
