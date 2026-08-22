@@ -21,10 +21,11 @@
 - 第5周（0821-0827）：第11-14练
 
 ## 更新流程
-1. 远子发新计划 → 解析日期和动作 → 按格式追加到 trainingData.ts
-2. cd frontend && npm run build 验证编译
-3. node_modules/.bin/vite preview --port <N> 启动预览
-4. present_files 展示结果
+1. 会话开始或更新数据前，先 `git pull --ff-only` 同步远端（手机小程序端可能已通过云端改过仓库）
+2. 远子发新计划 → 解析日期和动作 → 按格式追加到 trainingData.ts
+3. cd frontend && npm run build 验证编译
+4. node_modules/.bin/vite preview --port <N> 启动预览
+5. present_files 展示结果
 
 ## 部署与云端协作
 - 仓库：https://github.com/doulbeo/training-calendar（main 分支）
