@@ -18,7 +18,8 @@
 - 第2周（0729-0804）：第5-8练（但 label 标为第5-8练，实际第7-8练重复了）
 - 第3周（0805-0811）：第9-12练
 - 第4周（0812-0818）：第7-10练
-- 第5周（0821-0827）：第11-14练
+- 第5周（0821-0828）：第11-14练（原8.27→8.28后移，补8.27休息日，8天）
+- 第6周（0830-0905）：第15-18练
 
 ## 更新流程
 1. 会话开始或更新数据前，先 `git pull --ff-only` 同步远端（手机小程序端可能已通过云端改过仓库）
@@ -26,6 +27,16 @@
 3. cd frontend && npm run build 验证编译
 4. node_modules/.bin/vite preview --port <N> 启动预览
 5. present_files 展示结果
+
+## 调整日期注意事项（重要）
+- 调整某训练日日期时，必须同步：①把原训练日改成休息日或挪走 ②在新日期补训练日 ③days 数组按 date 升序重排，不能只改 date 字段否则数组顺序乱
+- id 不能随便改：useTraining.ts 用 day.id 在 localStorage 匹配 completed 状态，改 id 会丢已标记记录
+
+## localStorage 缓存陷阱（重要）
+- useTraining.ts 的 loadData() 优先读 localStorage 快照，会完全覆盖 defaultTrainingData
+- 后果：更新 trainingData.ts 后，浏览器若有旧缓存则看不到新数据（新周/修复全被挡住）
+- 当前方案：每次更新数据后升级 STORAGE_KEY（现为 'training-calendar-data-v2'）强制刷新
+- TODO：重构为按 id merge（localStorage 仅存 completed 状态，结构用最新 defaultTrainingData）一劳永逸
 
 ## 部署与云端协作
 - 仓库：https://github.com/doulbeo/training-calendar（main 分支）
