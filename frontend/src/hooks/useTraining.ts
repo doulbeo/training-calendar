@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { TrainingWeek } from '@/types/training';
 import { defaultTrainingData } from '@/data/trainingData';
 
-const STORAGE_KEY = 'training-calendar-data';
+const STORAGE_KEY = 'training-calendar-data-v2';
 
 function loadData(): TrainingWeek[] {
   try {

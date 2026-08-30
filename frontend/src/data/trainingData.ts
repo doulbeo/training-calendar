@@ -352,6 +352,7 @@ export const defaultTrainingData: TrainingWeek[] = [
         ]),
       },
       { id: 'w5d2', date: '8月22日', week: 5, dayOfWeek: 6, type: 'rest', label: '休息', completed: false, exercises: [] },
+      { id: 'w5d4', date: '8月23日', week: 5, dayOfWeek: 7, type: 'rest', label: '休息', completed: false, exercises: [] },
       {
         id: 'w5d3',
         date: '8月24日',
@@ -369,7 +370,7 @@ export const defaultTrainingData: TrainingWeek[] = [
           ex('哥本哈根支撑', ['3', '20-30秒', '自重']),
         ]),
       },
-      { id: 'w5d4', date: '8月23日', week: 5, dayOfWeek: 7, type: 'rest', label: '休息', completed: false, exercises: [] },
+      { id: 'w5d6', date: '8月25日', week: 5, dayOfWeek: 2, type: 'rest', label: '休息', completed: false, exercises: [] },
       {
         id: 'w5d5',
         date: '8月26日',
@@ -387,7 +388,7 @@ export const defaultTrainingData: TrainingWeek[] = [
           ex('单手三头下压', ['3', '10', '15kg']),
         ]),
       },
-      { id: 'w5d6', date: '8月25日', week: 5, dayOfWeek: 2, type: 'rest', label: '休息', completed: false, exercises: [] },
+      { id: 'w5d7', date: '8月27日', week: 5, dayOfWeek: 4, type: 'rest', label: '休息', completed: false, exercises: [] },
       {
         id: 'w5d8',
         date: '8月28日',
