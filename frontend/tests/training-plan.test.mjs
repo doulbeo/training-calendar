@@ -10,6 +10,13 @@ const { outputText } = ts.transpileModule(source, {
 const { defaultTrainingData } = await import(
   `data:text/javascript;base64,${Buffer.from(outputText).toString('base64')}`
 );
+const historySource = await readFile(new URL('../src/lib/training-history.ts', import.meta.url), 'utf8');
+const { outputText: historyOutput } = ts.transpileModule(historySource, {
+  compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 },
+});
+const { getHistoricalPlans } = await import(
+  `data:text/javascript;base64,${Buffer.from(historyOutput).toString('base64')}`
+);
 const currentWeek = defaultTrainingData.find(week => week.dateRange === '0907-0913');
 
 test('September 7–13 dates, weekdays, session numbers and all 26 exercises match the plan', () => {
@@ -23,8 +30,8 @@ test('September 7–13 dates, weekdays, session numbers and all 26 exercises mat
   });
   const trainingDays = currentWeek.days.filter(day => day.type !== 'rest');
   assert.deepEqual(trainingDays.map(day => day.label), [
-    '蹲推训练（第19练）', '硬拉后侧链训练（第20练）',
-    '蹲推训练（第21练）', '硬拉后侧链训练（第22练）',
+    '蹲推训练', '硬拉后侧链训练',
+    '蹲推训练', '硬拉后侧链训练',
   ]);
   assert.deepEqual(trainingDays.map(day => day.exercises.map(exercise => [
     exercise.name,
@@ -74,6 +81,16 @@ test('published day IDs and dates remain unique', () => {
   assert.equal(new Set(days.map(day => day.date)).size, days.length);
   const exercises = currentWeek.days.flatMap(day => day.exercises);
   assert.equal(new Set(exercises.map(exercise => exercise.id)).size, 26);
+});
+
+test('action history contains only earlier plans for the same action, newest first', () => {
+  const currentDay = currentWeek.days.find(day => day.id === 'w7d1');
+  const history = getHistoricalPlans(defaultTrainingData, currentDay, '杠铃深蹲');
+
+  assert.equal(history[0].date, '8月30日');
+  assert.ok(history.every(plan => plan.date !== currentDay.date));
+  assert.ok(history.every(plan => plan.lines.length > 0));
+  assert.deepEqual(getHistoricalPlans(defaultTrainingData, defaultTrainingData[0].days[0], '杠铃深蹲'), []);
 });
 
 const completionSource = await readFile(new URL('../src/lib/training-completion.ts', import.meta.url), 'utf8');

@@ -28,8 +28,12 @@ export default function Index() {
           className="flex items-center justify-between"
         >
           <div>
-            <h1
-              className="font-bold uppercase tracking-wider"
+            <button
+              type="button"
+              onClick={() => window.location.reload()}
+              className="font-bold uppercase tracking-wider text-left"
+              aria-label="刷新训练日历并回到当前日期"
+              title="刷新并回到当前日期"
               style={{
                 fontFamily: 'var(--font-family-condensed)',
                 fontSize: 'var(--font-size-headline)',
@@ -38,7 +42,7 @@ export default function Index() {
               }}
             >
               训练日历
-            </h1>
+            </button>
           </div>
 
           <button

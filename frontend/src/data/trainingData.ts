@@ -107,7 +107,7 @@ export const defaultTrainingData: TrainingWeek[] = [
         week: 2,
         dayOfWeek: 3,
         type: 'squat',
-        label: '蹲推训练（第5练）',
+        label: '蹲推训练',
         completed: false,
         exercises: setId('w2d1', [
           ex('杠铃深蹲', ['1', '5', '100kg'], ['3', '5', '85kg']),
@@ -123,7 +123,7 @@ export const defaultTrainingData: TrainingWeek[] = [
         week: 2,
         dayOfWeek: 4,
         type: 'deadlift',
-        label: '硬拉后侧链训练（第6练）',
+        label: '硬拉后侧链训练',
         completed: false,
         exercises: setId('w2d2', [
           ex('杠铃传统硬拉', ['1', '5', '105kg'], ['3', '3', '90kg']),
@@ -141,7 +141,7 @@ export const defaultTrainingData: TrainingWeek[] = [
         week: 2,
         dayOfWeek: 6,
         type: 'squat',
-        label: '蹲推训练（第7练）',
+        label: '蹲推训练',
         completed: false,
         exercises: setId('w2d4', [
           ex('杠铃低杠暂停深蹲', ['1', '3', '110kg', '底端暂停1秒'], ['1', '5', '100kg']),
@@ -159,7 +159,7 @@ export const defaultTrainingData: TrainingWeek[] = [
         week: 2,
         dayOfWeek: 1,
         type: 'deadlift',
-        label: '硬拉后侧链训练（第8练）',
+        label: '硬拉后侧链训练',
         completed: false,
         exercises: setId('w2d6', [
           ex('杠铃传统硬拉', ['3', '5', '105kg']),
@@ -184,7 +184,7 @@ export const defaultTrainingData: TrainingWeek[] = [
         week: 3,
         dayOfWeek: 3,
         type: 'squat',
-        label: '蹲推训练（第9练）',
+        label: '蹲推训练',
         completed: false,
         exercises: setId('w3d1', [
           ex('杠铃深蹲', ['1', '3', '105kg'], ['3', '6', '85kg']),
@@ -202,7 +202,7 @@ export const defaultTrainingData: TrainingWeek[] = [
         week: 3,
         dayOfWeek: 5,
         type: 'deadlift',
-        label: '硬拉后侧链训练（第10练）',
+        label: '硬拉后侧链训练',
         completed: false,
         exercises: setId('w3d3', [
           ex('杠铃传统硬拉', ['1', '3', '110kg'], ['3', '4', '90kg']),
@@ -220,7 +220,7 @@ export const defaultTrainingData: TrainingWeek[] = [
         week: 3,
         dayOfWeek: 7,
         type: 'squat',
-        label: '蹲推训练（第11练）',
+        label: '蹲推训练',
         completed: false,
         exercises: setId('w3d5', [
           ex('杠铃低杠暂停深蹲', ['1', '5', '105kg', '底端暂停1秒'], ['1', '5', '90kg']),
@@ -237,7 +237,7 @@ export const defaultTrainingData: TrainingWeek[] = [
         week: 3,
         dayOfWeek: 1,
         type: 'deadlift',
-        label: '硬拉后侧链训练（第12练）',
+        label: '硬拉后侧链训练',
         completed: false,
         exercises: setId('w3d6', [
           ex('杠铃传统硬拉', ['5', '3', '105kg']),
@@ -262,7 +262,7 @@ export const defaultTrainingData: TrainingWeek[] = [
         week: 4,
         dayOfWeek: 3,
         type: 'squat',
-        label: '蹲推训练（第7练）',
+        label: '蹲推训练',
         completed: false,
         exercises: setId('w4d1', [
           ex('杠铃深蹲', ['2', '3', '105kg'], ['2', '5', '90kg']),
@@ -280,7 +280,7 @@ export const defaultTrainingData: TrainingWeek[] = [
         week: 4,
         dayOfWeek: 5,
         type: 'deadlift',
-        label: '硬拉后侧链训练（第8练）',
+        label: '硬拉后侧链训练',
         completed: false,
         exercises: setId('w4d3', [
           ex('杠铃传统硬拉', ['2', '3', '115kg'], ['2', '4', '100kg']),
@@ -298,7 +298,7 @@ export const defaultTrainingData: TrainingWeek[] = [
         week: 4,
         dayOfWeek: 7,
         type: 'squat',
-        label: '蹲推训练（第9练）',
+        label: '蹲推训练',
         completed: false,
         exercises: setId('w4d5', [
           ex('杠铃低杠暂停深蹲', ['2', '4', '100kg', '底端暂停1秒']),
@@ -316,7 +316,7 @@ export const defaultTrainingData: TrainingWeek[] = [
         week: 4,
         dayOfWeek: 2,
         type: 'deadlift',
-        label: '硬拉后侧链训练（第10练）',
+        label: '硬拉后侧链训练',
         completed: false,
         exercises: setId('w4d7', [
           ex('杠铃传统硬拉', ['3', '4', '105kg']),
@@ -340,7 +340,7 @@ export const defaultTrainingData: TrainingWeek[] = [
         week: 5,
         dayOfWeek: 5,
         type: 'squat',
-        label: '蹲推训练（第11练）',
+        label: '蹲推训练',
         completed: false,
         exercises: setId('w5d1', [
           ex('杠铃深蹲', ['1', '5', '110kg'], ['2', '5', '90kg']),
@@ -359,7 +359,7 @@ export const defaultTrainingData: TrainingWeek[] = [
         week: 5,
         dayOfWeek: 1,
         type: 'deadlift',
-        label: '硬拉后侧链训练（第12练）',
+        label: '硬拉后侧链训练',
         completed: false,
         exercises: setId('w5d3', [
           ex('杠铃传统硬拉', ['1', '3', '120kg'], ['2', '3', '105kg']),
@@ -377,7 +377,7 @@ export const defaultTrainingData: TrainingWeek[] = [
         week: 5,
         dayOfWeek: 3,
         type: 'squat',
-        label: '蹲推训练（第13练）',
+        label: '蹲推训练',
         completed: false,
         exercises: setId('w5d5', [
           ex('杠铃低杠暂停深蹲', ['2', '5', '100kg', '底端暂停1秒']),
@@ -395,7 +395,7 @@ export const defaultTrainingData: TrainingWeek[] = [
         week: 5,
         dayOfWeek: 5,
         type: 'deadlift',
-        label: '硬拉后侧链训练（第14练）',
+        label: '硬拉后侧链训练',
         completed: false,
         exercises: setId('w5d7', [
           ex('杠铃传统硬拉', ['3', '3', '110kg']),
@@ -419,7 +419,7 @@ export const defaultTrainingData: TrainingWeek[] = [
         week: 6,
         dayOfWeek: 7,
         type: 'squat',
-        label: '蹲推训练（第15练）',
+        label: '蹲推训练',
         completed: false,
         exercises: setId('w6d1', [
           ex('杠铃深蹲', ['2', '3', '115kg'], ['2', '5', '95kg']),
@@ -437,7 +437,7 @@ export const defaultTrainingData: TrainingWeek[] = [
         week: 6,
         dayOfWeek: 2,
         type: 'deadlift',
-        label: '硬拉后侧链训练（第16练）',
+        label: '硬拉后侧链训练',
         completed: false,
         exercises: setId('w6d3', [
           ex('杠铃传统硬拉', ['1', '1', '130kg'], ['2', '3', '110kg']),
@@ -455,7 +455,7 @@ export const defaultTrainingData: TrainingWeek[] = [
         week: 6,
         dayOfWeek: 4,
         type: 'squat',
-        label: '蹲推训练（第17练）',
+        label: '蹲推训练',
         completed: false,
         exercises: setId('w6d5', [
           ex('杠铃低杠暂停深蹲', ['1', '2', '120kg', '底端暂停1秒']),
@@ -473,7 +473,7 @@ export const defaultTrainingData: TrainingWeek[] = [
         week: 6,
         dayOfWeek: 6,
         type: 'deadlift',
-        label: '硬拉后侧链训练（第18练）',
+        label: '硬拉后侧链训练',
         completed: false,
         exercises: setId('w6d7', [
           ex('杠铃传统硬拉', ['3', '3', '120kg']),
@@ -498,7 +498,7 @@ export const defaultTrainingData: TrainingWeek[] = [
         week: 7,
         dayOfWeek: 1,
         type: 'squat',
-        label: '蹲推训练（第19练）',
+        label: '蹲推训练',
         completed: false,
         exercises: setId('w7d1', [
           ex('杠铃深蹲', ['1', '2', '125kg'], ['3', '5', '105kg']),
@@ -516,7 +516,7 @@ export const defaultTrainingData: TrainingWeek[] = [
         week: 7,
         dayOfWeek: 3,
         type: 'deadlift',
-        label: '硬拉后侧链训练（第20练）',
+        label: '硬拉后侧链训练',
         completed: false,
         exercises: setId('w7d3', [
           ex('杠铃传统硬拉', ['1', '2', '130kg'], ['2', '4', '110kg']),
@@ -534,7 +534,7 @@ export const defaultTrainingData: TrainingWeek[] = [
         week: 7,
         dayOfWeek: 5,
         type: 'squat',
-        label: '蹲推训练（第21练）',
+        label: '蹲推训练',
         completed: false,
         exercises: setId('w7d5', [
           ex('杠铃低杠暂停深蹲', ['1', '3', '120kg', '底端暂停1秒']),
@@ -552,7 +552,7 @@ export const defaultTrainingData: TrainingWeek[] = [
         week: 7,
         dayOfWeek: 7,
         type: 'deadlift',
-        label: '硬拉后侧链训练（第22练）',
+        label: '硬拉后侧链训练',
         completed: false,
         exercises: setId('w7d7', [
           ex('杠铃传统硬拉', ['4', '4', '125kg']),

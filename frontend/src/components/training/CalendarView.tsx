@@ -1,7 +1,8 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TrainingWeek, TrainingDay } from '@/types/training';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, History } from 'lucide-react';
+import { getHistoricalPlans } from '@/lib/training-history';
 
 interface CalendarViewProps {
   weeks: TrainingWeek[];
@@ -11,6 +12,7 @@ const weekDayLabels = ['一', '二', '三', '四', '五', '六', '日'];
 
 export function CalendarView({ weeks }: CalendarViewProps) {
   const allDays = weeks.flatMap((w) => w.days);
+  const [expandedHistoryFor, setExpandedHistoryFor] = useState<string | null>(null);
 
   // Collect all months that have training data
   const months = useMemo(() => {
@@ -341,11 +343,6 @@ export function CalendarView({ weeks }: CalendarViewProps) {
                 >
                   {selectedDay.type === 'squat' ? '蹲推' : '硬拉'}
                 </span>
-                {selectedDay.label.match(/第\d+练/) && (
-                  <span style={{ fontSize: 'var(--font-size-small)', color: 'var(--muted-foreground)' }}>
-                    {selectedDay.label.match(/第\d+练/)?.[0]}
-                  </span>
-                )}
               </div>
 
               {selectedDay.exercises.map((ex, idx) => (
@@ -364,7 +361,24 @@ export function CalendarView({ weeks }: CalendarViewProps) {
                     >
                       {idx + 1}.
                     </span>
-                    {ex.name}
+                    <span className="flex-1 min-w-0">{ex.name}</span>
+                    <button
+                      type="button"
+                      aria-expanded={expandedHistoryFor === ex.id}
+                      aria-controls={`${ex.id}-history`}
+                      aria-label={`${expandedHistoryFor === ex.id ? '收起' : '展开'} ${ex.name}的历史计划`}
+                      title={`${expandedHistoryFor === ex.id ? '收起' : '查看'}历史计划`}
+                      onClick={() => setExpandedHistoryFor((openId) => openId === ex.id ? null : ex.id)}
+                      className="flex items-center justify-center flex-shrink-0 rounded transition-colors"
+                      style={{
+                        width: '1.75rem',
+                        height: '1.75rem',
+                        color: expandedHistoryFor === ex.id ? 'var(--primary)' : 'var(--muted-foreground)',
+                        backgroundColor: expandedHistoryFor === ex.id ? 'var(--secondary)' : 'transparent',
+                      }}
+                    >
+                      <History size={13} aria-hidden="true" />
+                    </button>
                   </div>
                   {ex.lines.map((line) => (
                     <div
@@ -389,6 +403,56 @@ export function CalendarView({ weeks }: CalendarViewProps) {
                       )}
                     </div>
                   ))}
+                  <AnimatePresence initial={false}>
+                    {expandedHistoryFor === ex.id && (
+                      <motion.div
+                        id={`${ex.id}-history`}
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
+                        className="overflow-hidden"
+                      >
+                        {(() => {
+                          const history = getHistoricalPlans(weeks, selectedDay, ex.name);
+
+                          return (
+                            <div
+                              style={{
+                                margin: 'var(--spacing-xs) 0 0 1.5rem',
+                                padding: 'var(--spacing-xs)',
+                                borderLeft: '2px solid var(--border)',
+                                backgroundColor: 'var(--secondary)',
+                                borderRadius: '0 var(--radius-sm) var(--radius-sm) 0',
+                              }}
+                            >
+                              {history.length === 0 ? (
+                                <div style={{ fontSize: 'var(--font-size-small)', color: 'var(--muted-foreground)' }}>
+                                  此前没有该动作的计划记录
+                                </div>
+                              ) : (
+                                <div className="flex flex-col gap-2">
+                                  {history.map((plan) => (
+                                    <div key={plan.dayId} className="flex items-baseline gap-2" style={{ fontSize: 'var(--font-size-small)' }}>
+                                      <span className="font-semibold" style={{ color: 'var(--foreground)' }}>{plan.date}</span>
+                                      <span className="tabular-nums" style={{ color: 'var(--muted-foreground)' }}>
+                                        {plan.lines.map((line) => (
+                                          <span key={line.id}>
+                                            {line.sets}×{line.reps} <span className="font-semibold" style={{ color: 'var(--primary)' }}>{line.weight}</span>
+                                            {line.id !== plan.lines.at(-1)?.id ? ' · ' : ''}
+                                          </span>
+                                        ))}
+                                      </span>
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })()}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               ))}
             </div>
