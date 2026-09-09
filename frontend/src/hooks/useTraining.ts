@@ -1,42 +1,25 @@
-import { useState, useEffect, useCallback } from 'react';
-import { TrainingWeek } from '@/types/training';
+import { useState, useEffect } from 'react';
 import { defaultTrainingData } from '@/data/trainingData';
-
-const STORAGE_KEY = 'training-calendar-data-v2';
-
-function loadData(): TrainingWeek[] {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) return JSON.parse(raw);
-  } catch { /* ignore */ }
-  return defaultTrainingData;
-}
-
-function saveData(data: TrainingWeek[]) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-}
+import { applyCompletion, COMPLETION_KEY, loadCompletion } from '@/lib/training-completion';
 
 export function useTraining() {
-  const [weeks, setWeeks] = useState<TrainingWeek[]>(() => loadData());
+  const [completion] = useState(() => {
+    try {
+      return loadCompletion(localStorage);
+    } catch {
+      return {};
+    }
+  });
 
   useEffect(() => {
-    saveData(weeks);
-  }, [weeks]);
+    try {
+      localStorage.setItem(COMPLETION_KEY, JSON.stringify(completion));
+    } catch {
+      // Read-only plans remain available when browser storage is blocked or full.
+    }
+  }, [completion]);
 
-  const toggleComplete = useCallback((dayId: string) => {
-    setWeeks(prev =>
-      prev.map(week => ({
-        ...week,
-        days: week.days.map(day =>
-          day.id === dayId ? { ...day, completed: !day.completed } : day
-        ),
-      }))
-    );
-  }, []);
-
-  const resetData = useCallback(() => {
-    setWeeks(defaultTrainingData);
-  }, []);
+  const weeks = applyCompletion(defaultTrainingData, completion);
 
   const progress = (() => {
     let total = 0;
@@ -52,5 +35,5 @@ export function useTraining() {
     return { done, total, percent: total > 0 ? Math.round((done / total) * 100) : 0 };
   })();
 
-  return { weeks, progress, toggleComplete, resetData };
+  return { weeks, progress };
 }

@@ -190,7 +190,6 @@ export function CalendarView({ weeks }: CalendarViewProps) {
               <div key={wi} className="grid grid-cols-7" style={{ borderTop: '1px solid var(--border)' }}>
                 {week.map((day, di) => {
                   const hasTraining = !!day.dayData && day.dayData.type !== 'rest';
-                  const isRest = day.dayData?.type === 'rest';
                   const isSelected = selectedDay?.id === day.dayData?.id;
                   const isToday = !day.isPadding && day.date.getDate() === todayDate && day.date.getMonth() + 1 === todayMonth;
 
@@ -202,9 +201,7 @@ export function CalendarView({ weeks }: CalendarViewProps) {
                     ? day.dayData!.type === 'squat'
                       ? 'var(--squat)'
                       : 'var(--deadlift)'
-                    : isRest
-                    ? 'var(--muted-foreground)'
-                    : 'var(--foreground)';
+                    : 'var(--muted-foreground)';
 
                   return (
                     <motion.div
@@ -344,6 +341,11 @@ export function CalendarView({ weeks }: CalendarViewProps) {
                 >
                   {selectedDay.type === 'squat' ? '蹲推' : '硬拉'}
                 </span>
+                {selectedDay.label.match(/第\d+练/) && (
+                  <span style={{ fontSize: 'var(--font-size-small)', color: 'var(--muted-foreground)' }}>
+                    {selectedDay.label.match(/第\d+练/)?.[0]}
+                  </span>
+                )}
               </div>
 
               {selectedDay.exercises.map((ex, idx) => (

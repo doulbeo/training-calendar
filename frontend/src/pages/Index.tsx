@@ -39,9 +39,6 @@ export default function Index() {
             >
               训练日历
             </h1>
-            <p style={{ fontSize: 'var(--font-size-label)', color: 'var(--muted-foreground)' }}>
-              蹲推 & 硬拉后侧链 · 7/22 - 8/11
-            </p>
           </div>
 
           <button
