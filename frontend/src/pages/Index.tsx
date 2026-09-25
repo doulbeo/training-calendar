@@ -3,6 +3,7 @@ import { useTraining } from '@/hooks/useTraining';
 import { CalendarView } from '@/components/training/CalendarView';
 import { Flame } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { refreshCalendar } from '@/lib/calendar-view-state';
 
 export default function Index() {
   const { weeks } = useTraining();
@@ -30,7 +31,7 @@ export default function Index() {
           <div>
             <button
               type="button"
-              onClick={() => window.location.reload()}
+              onClick={refreshCalendar}
               className="font-bold uppercase tracking-wider text-left"
               aria-label="刷新训练日历并回到当前日期"
               title="刷新并回到当前日期"

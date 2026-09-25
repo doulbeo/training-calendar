@@ -1,8 +1,9 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useLayoutEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TrainingWeek, TrainingDay } from '@/types/training';
 import { ChevronLeft, ChevronRight, History } from 'lucide-react';
 import { getHistoricalPlans } from '@/lib/training-history';
+import { loadCalendarView, saveCalendarView } from '@/lib/calendar-view-state';
 
 interface CalendarViewProps {
   weeks: TrainingWeek[];
@@ -12,7 +13,8 @@ const weekDayLabels = ['一', '二', '三', '四', '五', '六', '日'];
 
 export function CalendarView({ weeks }: CalendarViewProps) {
   const allDays = weeks.flatMap((w) => w.days);
-  const [expandedHistoryFor, setExpandedHistoryFor] = useState<string | null>(null);
+  const [savedView] = useState(loadCalendarView);
+  const [expandedHistoryFor, setExpandedHistoryFor] = useState<string | null>(savedView?.expandedHistoryFor ?? null);
 
   // Collect all months that have training data
   const months = useMemo(() => {
@@ -37,6 +39,7 @@ export function CalendarView({ weeks }: CalendarViewProps) {
   const todayStr = `${todayMonth}月${todayDate}日`;
 
   const [selectedDay, setSelectedDay] = useState<TrainingDay | null>(() => {
+    if (savedView) return allDays.find((d) => d.id === savedView.selectedDayId && d.type !== 'rest') || null;
     return allDays.find((d) => d.date === todayStr && d.type !== 'rest') || null;
   });
 
@@ -46,10 +49,37 @@ export function CalendarView({ weeks }: CalendarViewProps) {
     return idx >= 0 ? idx : 0;
   }, [months]);
 
-  const [monthIndex, setMonthIndex] = useState(initialMonth);
+  const [monthIndex, setMonthIndex] = useState(() => {
+    const savedIndex = months.findIndex((m) => `${m.year}-${m.month}` === savedView?.month);
+    return savedIndex >= 0 ? savedIndex : initialMonth;
+  });
   const [direction, setDirection] = useState(0);
 
   const currentMonth = months[monthIndex] || months[0];
+  const monthKey = currentMonth ? `${currentMonth.year}-${currentMonth.month}` : '';
+
+  useLayoutEffect(() => {
+    const previous = window.history.scrollRestoration;
+    window.history.scrollRestoration = 'manual';
+    window.scrollTo(0, savedView?.scrollY ?? 0);
+    return () => { window.history.scrollRestoration = previous; };
+  }, [savedView]);
+
+  useEffect(() => {
+    const save = () => saveCalendarView({
+      month: monthKey,
+      selectedDayId: selectedDay?.id ?? null,
+      expandedHistoryFor,
+      scrollY: window.scrollY,
+    });
+    save();
+    window.addEventListener('scroll', save, { passive: true });
+    window.addEventListener('pagehide', save);
+    return () => {
+      window.removeEventListener('scroll', save);
+      window.removeEventListener('pagehide', save);
+    };
+  }, [monthKey, selectedDay?.id, expandedHistoryFor]);
   const canGoPrev = monthIndex > 0;
   const canGoNext = monthIndex < months.length - 1;
 
